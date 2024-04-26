@@ -1,0 +1,53 @@
+
+1 Approach Split-
+Get Transaction 
+1.1 Page Count > 1 then Split PDF Store into Folder (IACETPDFName_SenderName_EmailTime)
+1.2 Read PDF One by One  
+    Will check data is readable by read pdf activity. Variable<>"" 
+   if varaible="" then Use PDF OCR. 
+   if variable="" then invalid PDF (Valid PDF  "IACET") or Blank PDF and Create Report for Invalid PDF Pages.>> Reporting file "Completed PDF Details"
+
+if info is missing (Email, Contact Number, Name, Address) then Send Email to Sender.Update status in Report and Excel template - Missing info fill. 
+(Waiting time 4 hr- Postponed for 4 hr-Customer message add Page 2 and Page 3   
+ (1 How to get info- Read missing infor template via email ?,2 Sharepoint List/Table& Read Sharpoint ? 3 Create Form and read form, 4 will create Another long running process)
+
+for email : Emails Subject : TransactionID_FileName_Report
+
+GOTO next PDF Page 
+Otehr Process Steps
+End Of the completed PDF file send consolidate PDF to sender.
+
+Get Next PDF File Transaction >>
+
+
+
+Senarios for Transaction :
+1 PDF file (Transaction) have 7 PDF Page
+
+ 1 Page is fine.
+	Valid PageNumber 1
+ 2 Invalid PDF Page .. PDF Details stored into variable>> End of the transction will add details into the Report
+	InvalidPage 2
+ 3 Missing info..Store details into mising variable  
+    MissingPageVariable =3
+ 4 Page is fine.
+	Valid PageNumber 1,4
+ 5 Invalid PDF Page .. PDF Details stored into variable>> End of the transction will add details into the Report.
+	InvalidPage 2,5
+ 6 Missing info..Store details into mising variable  
+    MissingPageVariable = 3,6
+ 
+Last Page of Transaction :
+   7 
+     7.1 if last transction have valid page then need to send email if missinginfromationvariable have somedetails.
+     7.2 if last transction have invalid page  then need to send email if missinginfromationvariable have somedetails.
+     7.3 if last transction have misssingpagedetail  then need to send email if missinginfromationvariable have somedetails.
+
+
+2 Approach : Add missing details into sharepoint.
+
+3 Approach : Dispatcher , PDFwithFillAvailableinfoPeformer , FillMissingInfoPerformer
+
+4 Approach : Dispatcher , PDFwithFillAvailableinfoPeformer Send Form to Sender , FillMissingInfoPerformer- Action Center
+
+5 Apporach : Dipatcher, Perforemer with action centre  via orchestration process
